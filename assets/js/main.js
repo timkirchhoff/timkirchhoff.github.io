@@ -2,8 +2,7 @@
 
 	var	$window = $(window),
 		$body = $('body'),
-		$nav = $('#nav'),
-		$form = $('#contact-form');
+		$nav = $('#nav');
 
 	// Breakpoints.
 		breakpoints({
@@ -28,18 +27,6 @@
 		$('#nav a, .scrolly').scrolly({
 			speed: 1000,
 			offset: function() { return $nav.height(); }
-		});
-
-	// Ajax Email
-		$form.submit(function(e) {
-			e.preventDefault();
-			var $formData = $form.serialize();
-			console.log('Submitted!');
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: "email.php",
-		// 		data: $formData
-		// 	})
 		});
 
 })(jQuery);

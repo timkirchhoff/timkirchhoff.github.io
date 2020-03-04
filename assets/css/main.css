@@ -1568,6 +1568,11 @@ input, select, textarea {
 		border: 0;
 	}
 
+	#contact-form-status {
+		color: #fafafa;
+		font-weight: 400;
+	}
+
 /* Tables */
 
 	table {
@@ -2054,6 +2059,7 @@ input, select, textarea {
 			}
 
 			.wrapper.style4 form input[type=text],
+			.wrapper.style4 form input[type=email],
 			.wrapper.style4 form input[type=password],
 			.wrapper.style4 form select,
 			.wrapper.style4 form textarea {

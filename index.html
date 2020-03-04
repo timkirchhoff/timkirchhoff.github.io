@@ -7,14 +7,6 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
-		<!-- Nav -->
-			<!-- <nav id="nav">
-				<ul class="container">
-					<li><a href="#contact">Contact</a></li>
-					<li><a href="#portfolio">Resume</a></li>
-				</ul>
-			</nav> -->
-
 		<!-- Home -->
 			<article id="top" class="wrapper style1">
 				<div class="container">
@@ -131,23 +123,24 @@
 					</header>
 					<div class="row">
 						<div class="col-12">
-							<form method="POST" action="#" id="contact-form">
+							<form method="POST" action="https://formspree.io/mdozprgd" id="contact-form">
+								<p id="contact-form-status"></p>
 								<div class="row">
 									<div class="col-6 col-12-small">
-										<input type="text" name="name" id="name" placeholder="Name" >
+										<input type="text" name="name" id="name" placeholder="Name" required>
 									</div>
 									<div class="col-6 col-12-small">
-										<input type="text" name="email" id="email" placeholder="Email" >
+										<input type="email" name="_replyto" id="email" placeholder="Email" required>
 									</div>
 									<div class="col-12">
-										<input type="text" name="subject" id="subject" placeholder="Subject" >
+										<input type="text" name="_subject" id="subject" placeholder="Subject" required>
 									</div>
 									<div class="col-12">
-										<textarea name="message" id="message" placeholder="Message" ></textarea>
+										<textarea name="message" id="message" placeholder="Message" required></textarea>
 									</div>
 									<div class="col-12">
 										<ul class="actions">
-											<li><input type="submit" name="submit"></li>
+											<li><input type="submit" name="submit" id="submit"></li>
 											<li><input type="reset" value="Clear Form" class="alt"></li>
 										</ul>
 									</div>
@@ -165,5 +158,41 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				window.addEventListener("DOMContentLoaded", function() {
+					var form = document.getElementById("contact-form");
+					var status = document.getElementById("contact-form-status");
+
+					function success() {
+						form.reset();
+						status.innerHTML = "Thank you for your message! Will be in touch soon.";
+					}
+
+					function error() {
+						status.innerHTML = "Message not sent.. Please try again.";
+					}
+
+					form.addEventListener("submit", function(e) {
+						e.preventDefault();
+						var data = new FormData(form);
+						ajax(form.method, form.action, data, success, error);
+					});
+				});
+
+				function ajax(method, url, data, success, error) {
+					var xhr = new XMLHttpRequest();
+					xhr.open(method, url);
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState !== XMLHttpRequest.DONE) return;
+						if (xhr.status === 200) {
+							success(xhr.response, xhr.responseType);
+						} else {
+							error(xhr.status, xhr.response, xhr.responseType);
+						}
+					};
+					xhr.send(data);
+				}
+			</script>
 	</body>
 </html>
